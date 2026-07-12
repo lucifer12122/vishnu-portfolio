@@ -19,6 +19,31 @@ export default function App() {
   // Station Coordinates (Top Right Corner)
   const stationPos = { x: window.innerWidth - 120, y: 120 };
 
+  // Dynamic Favicon Switcher Engine (Terminal Prompt Favicon)
+  useEffect(() => {
+    const svgIcon = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+        <rect width="32" height="32" rx="6" fill="#0b0f19"/>
+        <path d="M8 10 L14 16 L8 22" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="16" y1="22" x2="24" y2="22" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+    `;
+    
+    const blob = new Blob([svgIcon], { type: 'image/svg+xml' });
+    const faviconUrl = URL.createObjectURL(blob);
+    
+    // Locate or create the standard shortcut icon header link
+    let link = document.querySelector("link[rel~='icon']");
+    if (!link) {
+      link = document.createElement('link');
+      link.rel = 'icon';
+      document.head.appendChild(link);
+    }
+    link.href = faviconUrl;
+    
+    return () => URL.revokeObjectURL(faviconUrl);
+  }, []);
+
   // Track global scroll progression
   useEffect(() => {
     const handleScroll = () => {
@@ -146,47 +171,47 @@ export default function App() {
   const technicalPipelines = [
     {
       id: "nlp-pipeline",
-      title: "CLINICAL TEXT-TO-ICD-10 AGENTIC DATA ENGINE",
-      tag: "AI_AGENTS",
+      title: "Clinical Text-to-ICD-10 Agentic Data Engine",
+      tag: "AI Agents",
       icon: <Cpu size={18} />,
       points: [
         "Engineered a ReAct-style recursive agent execution pipeline designed to map highly raw doctor-patient conversational transcripts into standardized ICD-10 medical code sets.",
         "Integrated custom Named Entity Recognition arrays, UMLS-based normalization nodes, and high-efficiency BM25 text retrieval pipelines to correctly surface candidate records.",
         "Achieved a strict 86% diagnostic accuracy evaluation rating across tested unstructured clinical documentation sheets."
       ],
-      tech: ["PYTHON", "REACT AGENTS", "UMLS MATRIX", "BM25 RETRIEVAL", "NER LAYER"]
+      tech: ["Python", "React Agents", "UMLS Matrix", "BM25 Retrieval", "NER Layer"]
     },
     {
       id: "voice-pipeline",
-      title: "VOICE SOCIAL — VOICE-FIRST MOBILE ARCHITECTURE",
-      tag: "MOBILE_INFRA",
+      title: "Voice Social — Voice-First Mobile Architecture",
+      tag: "Mobile Infra",
       icon: <Layers size={18} />,
       points: [
         "Designed and constructed a mobile-exclusive, voice-only social platform in Flutter, incorporating real-time waveform visualization rendering engines and threaded audio replies.",
         "Architected low-overhead backend schemas within a Supabase ecosystem with active real-time subscriptions and Row Level Security backed by Backblaze B2 storage layers entirely on free-tier services.",
         "Implemented client-side hardware-level FFmpeg audio compression arrays (AAC @ 32-64kbps), reducing individual payload mass by 85–90% alongside hitting a 70–80% local caching performance score."
       ],
-      tech: ["FLUTTER", "SUPABASE ENGINE", "POSTGRESQL", "FFMPEG LAYER", "BACKBLAZE B2"]
+      tech: ["Flutter", "Supabase Engine", "PostgreSQL", "FFmpeg Layer", "Backblaze B2"]
     },
     {
       id: "mern-pipeline",
-      title: "DARK STAR — GAMIFIED FITNESS TELEMETRY SYSTEM",
-      tag: "MERN_STACK",
+      title: "Dark Star — Gamified Fitness Telemetry System",
+      tag: "MERN Stack",
       icon: <Code size={18} />,
       points: [
         "Assembled an end-to-end telemetry system running on a MERN stack backend designed to log, map, and process user fitness metric logs.",
         "Configured an internal AI recommendation module parsing patient historical health summaries to adaptively generate personalized workout tracks.",
         "Secured system state changes and profile authorization pipelines utilizing robust SHA-based hashing cryptographic matrices."
       ],
-      tech: ["MONGODB", "EXPRESS.JS", "REACT.JS", "NODE.JS CORE", "CRYPT_SHA"]
+      tech: ["MongoDB", "Express.js", "React.js", "Node.js Core", "Crypt SHA"]
     }
   ];
 
   const skillMatrix = [
-    { category: "LANGUAGES", items: ["PYTHON", "JAVA", "C_CORE", "JAVASCRIPT", "HTML_CSS"] },
-    { category: "DATA STORES", items: ["MYSQL", "MONGODB", "SQL_ENGINE"] },
-    { category: "FRAMEWORKS & TOOLS", items: ["REACT", "NODE.JS", "FLUTTER", "SUPABASE", "DOCKER", "GIT_GITHUB"] },
-    { category: "MODES", items: ["PROBLEM_SOLVING", "CRITICAL_THINKING", "RESEARCH_ANALYSIS", "TEAM_COLLAB"] }
+    { category: "Languages", items: ["Python", "Java", "C Core", "JavaScript", "HTML & CSS"] },
+    { category: "Data Stores", items: ["MySQL", "MongoDB", "SQL Engine"] },
+    { category: "Frameworks & Tools", items: ["React", "Node.js", "Flutter", "Supabase", "Docker", "Git & GitHub"] },
+    { category: "Methodologies", items: ["Problem Solving", "Critical Thinking", "Research Analysis", "Team Collaboration"] }
   ];
 
   const isFlipped = Math.abs(catAngle) > 90;
@@ -208,28 +233,19 @@ export default function App() {
         transform: 'translate(-50%, -50%)',
       }}>
         <svg viewBox="0 0 90 50" style={{ width: '100%', height: '100%' }}>
-          {/* Styled Base Mat with subtle shadow */}
           <rect x="3" y="18" width="84" height="26" rx="13" fill="#D6D6D6" opacity="0.4" />
           <rect x="5" y="16" width="80" height="26" rx="13" fill="#F0F0F0" stroke="#000" strokeWidth="2" />
           
-          {/* ================ WATER BOWL (LEFT) ================ */}
-          {/* Outer Bowl Rim Depth */}
+          {/* WATER BOWL */}
           <ellipse cx="27" cy="31" rx="16" ry="9" fill="#BCC0C4" stroke="#000" strokeWidth="2" />
-          {/* Inner Bowl Wall */}
           <ellipse cx="27" cy="28" rx="16" ry="9" fill="#E8ECEF" stroke="#000" strokeWidth="2" />
-          {/* Water Surface Line */}
           <ellipse cx="27" cy="29" rx="13" ry="7" fill="#74C0FC" opacity="0.85" stroke="#4dabf7" strokeWidth="1" />
-          {/* Water Specular Highlight */}
           <path d="M 18 28 Q 22 25 28 26" fill="none" stroke="#FFF" strokeWidth="1.5" strokeLinecap="round" opacity="0.7" />
 
-          {/* ================ FOOD BOWL (RIGHT) ================ */}
-          {/* Outer Bowl Rim Depth */}
+          {/* FOOD BOWL */}
           <ellipse cx="63" cy="31" rx="16" ry="9" fill="#BCC0C4" stroke="#000" strokeWidth="2" />
-          {/* Inner Bowl Wall */}
           <ellipse cx="63" cy="28" rx="16" ry="9" fill="#E8ECEF" stroke="#000" strokeWidth="2" />
-          {/* Kibble Pile Base Fill */}
           <ellipse cx="63" cy="28" rx="12" ry="6" fill="#A0522D" />
-          {/* Structured Isometric Kibble Bits */}
           <circle cx="58" cy="25" r="2" fill="#8B4513" stroke="#5C2E0B" strokeWidth="0.5" />
           <circle cx="63" cy="24" r="2.2" fill="#CD853F" stroke="#8B4513" strokeWidth="0.5" />
           <circle cx="68" cy="26" r="1.8" fill="#8B4513" stroke="#5C2E0B" strokeWidth="0.5" />
@@ -326,8 +342,8 @@ export default function App() {
         background: '#FFF', border: 'var(--border)', padding: '8px 12px',
         fontSize: '0.65rem', fontWeight: 700, boxShadow: '3px 3px 0px #000', pointerEvents: 'none'
       }}>
-        <div>X_COORD: {mousePos.x} // Y_COORD: {mousePos.y}</div>
-        <div>TARGET_TRACK: X:{Math.round(catPos.x)} Y:{Math.round(catPos.y)}</div>
+        <div>X: {mousePos.x}px // Y: {mousePos.y}px</div>
+        <div>Cat: X:{Math.round(catPos.x)} Y:{Math.round(catPos.y)} [{catState}]</div>
       </div>
 
       {/* Navigation Matrix */}
@@ -339,13 +355,13 @@ export default function App() {
       }}>
         <div className="logo" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 700 }}>
           <Terminal size={18} />
-          P_VISHNU_CHAITANYA // ARCH_INDEX
+          P. Vishnu Chaitanya
         </div>
         <ul style={{ listStyle: 'none', display: 'flex', gap: '24px' }}>
-          <li><a href="#about" style={{ fontSize: '0.8rem', fontWeight: 700 }}>ABOUT</a></li>
-          <li><a href="#work" style={{ fontSize: '0.8rem', fontWeight: 700 }}>PIPELINES</a></li>
-          <li><a href="#matrix" style={{ fontSize: '0.8rem', fontWeight: 700 }}>MATRIX</a></li>
-          <li><a href="#papers" style={{ fontSize: '0.8rem', fontWeight: 700 }}>DOCS</a></li>
+          <li><a href="#about" style={{ fontSize: '0.8rem', fontWeight: 700 }}>About</a></li>
+          <li><a href="#work" style={{ fontSize: '0.8rem', fontWeight: 700 }}>Pipelines</a></li>
+          <li><a href="#matrix" style={{ fontSize: '0.8rem', fontWeight: 700 }}>Matrix</a></li>
+          <li><a href="#papers" style={{ fontSize: '0.8rem', fontWeight: 700 }}>Documents</a></li>
         </ul>
       </nav>
 
@@ -383,31 +399,31 @@ export default function App() {
               <path d="M 230 190 L 290 250 L 360 250" />
             </svg>
 
-            <a href="#nlp-pipeline" className="canvas-label" style={{ position: 'absolute', background: '#FFF', border: 'var(--border)', padding: '4px 10px', fontSize: '0.7rem', fontWeight: 700, boxShadow: '3px 3px 0px #000', top: '45px', left: '15px' }}>[NODE_01_NLP]</a>
-            <a href="#voice-pipeline" className="canvas-label" style={{ position: 'absolute', background: '#FFF', border: 'var(--border)', padding: '4px 10px', fontSize: '0.7rem', fontWeight: 700, boxShadow: '3px 3px 0px #000', top: '45px', right: '15px' }}>[NODE_02_VOICE]</a>
-            <a href="#mern-pipeline" className="canvas-label" style={{ position: 'absolute', background: '#FFF', border: 'var(--border)', padding: '4px 10px', fontSize: '0.7rem', fontWeight: 700, boxShadow: '3px 3px 0px #000', bottom: '45px', left: '15px' }}>[NODE_03_MERN]</a>
-            <a href="#papers" className="canvas-label" style={{ position: 'absolute', background: '#FFF', border: 'var(--border)', padding: '4px 10px', fontSize: '0.7rem', fontWeight: 700, boxShadow: '3px 3px 0px #000', bottom: '45px', right: '15px' }}>[NODE_04_DOCS]</a>
+            <a href="#nlp-pipeline" className="canvas-label" style={{ position: 'absolute', background: '#FFF', border: 'var(--border)', padding: '4px 10px', fontSize: '0.7rem', fontWeight: 700, boxShadow: '3px 3px 0px #000', top: '45px', left: '15px' }}>[NLP Node]</a>
+            <a href="#voice-pipeline" className="canvas-label" style={{ position: 'absolute', background: '#FFF', border: 'var(--border)', padding: '4px 10px', fontSize: '0.7rem', fontWeight: 700, boxShadow: '3px 3px 0px #000', top: '45px', right: '15px' }}>[Voice Node]</a>
+            <a href="#mern-pipeline" className="canvas-label" style={{ position: 'absolute', background: '#FFF', border: 'var(--border)', padding: '4px 10px', fontSize: '0.7rem', fontWeight: 700, boxShadow: '3px 3px 0px #000', bottom: '45px', left: '15px' }}>[MERN Node]</a>
+            <a href="#papers" className="canvas-label" style={{ position: 'absolute', background: '#FFF', border: 'var(--border)', padding: '4px 10px', fontSize: '0.7rem', fontWeight: 700, boxShadow: '3px 3px 0px #000', bottom: '45px', right: '15px' }}>[Documents]</a>
           </div>
         </div>
 
         <h1 style={{ fontSize: 'clamp(2.2rem, 6vw, 4.2rem)', lineHeight: 0.95, marginTop: '10px' }}>PULAVARTHI VISHNU CHAITANYA</h1>
         <div className="sub" style={{ fontSize: '0.85rem', background: '#000', color: '#FFF', padding: '4px 12px', marginTop: '16px', display: 'inline-block' }}>
-          COMPUTER SCIENCE UNDERGRADUATE // AI & ML SPECIALIZATION
+          Computer Science Undergraduate // AI & ML Specialization
         </div>
         <p className="tag" style={{ margin: '24px auto 0', maxWidth: '650px', fontSize: '1rem', color: '#333', lineHeight: 1.6, textAlign: 'justify' }}>
           I architect highly-disciplined computational processing engines that parse messy, unstructured inputs into verified machine intelligence—translating raw clinical discourse transcripts, low-level real-time audio streams, and underwater computer vision environments into precise data structures.
         </p>
         
         <div className="cta-row" style={{ marginTop: '36px', display: 'flex', gap: '16px' }}>
-          <a className="btn dark" href="#work">EXECUTE_SYSTEM_VIEW</a>
-          <a className="btn" href="mailto:vishnuchaitanyapulavarthi@gmail.com">INITIALIZE_COMMS</a>
+          <a className="btn dark" href="#work">View Projects</a>
+          <a className="btn" href="mailto:vishnuchaitanyapulavarthi@gmail.com">Contact Me</a>
         </div>
       </header>
 
       {/* Section 01: Profile */}
       <section id="about" style={{ padding: '100px 4vw', maxWidth: '1200px', margin: '0 auto', borderBottom: 'var(--border)' }}>
-        <span className="section-index" style={{ fontSize: '0.8rem', fontWeight: 700, border: 'var(--border)', padding: '4px 12px', display: 'inline-block', marginBottom: '24px', background: '#FFF' }}>01 // DESCRIPTOR</span>
-        <div className="section-head"><h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', marginBottom: '20px' }}>SYSTEM PROFILE</h2></div>
+        <span className="section-index" style={{ fontSize: '0.8rem', fontWeight: 700, border: 'var(--border)', padding: '4px 12px', display: 'inline-block', marginBottom: '24px', background: '#FFF' }}>01 // Profile</span>
+        <div className="section-head"><h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', marginBottom: '20px' }}>System Profile</h2></div>
         <div className="profile-layout">
           <div>
             <p style={{ fontSize: '1.05rem', marginBottom: '20px', lineHeight: 1.7, textAlign: 'justify' }}>I build at the intersection of agentic system execution, machine learning pipelines, and highly scaled backend architectures. My design methodologies emphasize decoupling computing layers to address platform bottlenecks—whether that involves designing asynchronous processing networks within free-tier cluster parameters, or establishing recursive retrieval engines over large medical ontologies.</p>
@@ -415,10 +431,10 @@ export default function App() {
           <div>
             <table className="spec-sheet" style={{ width: '100%', borderCollapse: 'collapse', background: '#FFF' }}>
               <tbody>
-                <tr><td style={{ border: 'var(--border)', padding: '14px', fontWeight: 700, background: 'var(--light-gray)', width: '35%' }}>INSTITUTION</td><td style={{ border: 'var(--border)', padding: '14px' }}>Amrita School of Computing, Amrita Vishwa Vidyapeetham</td></tr>
-                <tr><td style={{ border: 'var(--border)', padding: '14px', fontWeight: 700, background: 'var(--light-gray)' }}>DISCIPLINE</td><td style={{ border: 'var(--border)', padding: '14px' }}>B.Tech CSE — Artificial Intelligence</td></tr>
-                <tr><td style={{ border: 'var(--border)', padding: '14px', fontWeight: 700, background: 'var(--light-gray)' }}>CGPA_METRIC</td><td style={{ border: 'var(--border)', padding: '14px' }}>7.48 / 10.00</td></tr>
-                <tr><td style={{ border: 'var(--border)', padding: '14px', fontWeight: 700, background: 'var(--light-gray)' }}>TIMELINE</td><td style={{ border: 'var(--border)', padding: '14px' }}>2023 — 2027</td></tr>
+                <tr><td style={{ border: 'var(--border)', padding: '14px', fontWeight: 700, background: 'var(--light-gray)', width: '35%' }}>Institution</td><td style={{ border: 'var(--border)', padding: '14px' }}>Amrita School of Computing, Amrita Vishwa Vidyapeetham</td></tr>
+                <tr><td style={{ border: 'var(--border)', padding: '14px', fontWeight: 700, background: 'var(--light-gray)' }}>Discipline</td><td style={{ border: 'var(--border)', padding: '14px' }}>B.Tech CSE — Artificial Intelligence</td></tr>
+                <tr><td style={{ border: 'var(--border)', padding: '14px', fontWeight: 700, background: 'var(--light-gray)' }}>CGPA</td><td style={{ border: 'var(--border)', padding: '14px' }}>7.48 / 10.00</td></tr>
+                <tr><td style={{ border: 'var(--border)', padding: '14px', fontWeight: 700, background: 'var(--light-gray)' }}>Timeline</td><td style={{ border: 'var(--border)', padding: '14px' }}>2023 — 2027</td></tr>
               </tbody>
             </table>
           </div>
@@ -427,13 +443,13 @@ export default function App() {
 
       {/* Section 02: Selected Production Pipelines */}
       <section id="work" style={{ padding: '100px 4vw', maxWidth: '1200px', margin: '0 auto', borderBottom: 'var(--border)' }}>
-        <span className="section-index" style={{ fontSize: '0.8rem', fontWeight: 700, border: 'var(--border)', padding: '4px 12px', display: 'inline-block', marginBottom: '24px', background: '#FFF' }}>02 // ARCHITECTURES</span>
+        <span className="section-index" style={{ fontSize: '0.8rem', fontWeight: 700, border: 'var(--border)', padding: '4px 12px', display: 'inline-block', marginBottom: '24px', background: '#FFF' }}>02 // Projects</span>
         <div className="project-pipeline" style={{ display: 'flex', flexDirection: 'column', gap: '50px' }}>
           {technicalPipelines.map((proj) => (
             <article key={proj.id} id={proj.id} className="project-panel" style={{ border: 'var(--border)', padding: '40px', background: '#FFF', boxShadow: '6px 6px 0px #000', position: 'relative', scrollMarginTop: '100px' }}>
               <div style={{ position: 'absolute', top: '12px', left: '16px', fontSize: '0.6rem', color: 'var(--muted)', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px' }}>
                 {proj.icon}
-                <span>// LOG_NODE_{proj.id.toUpperCase()}</span>
+                <span>// Log Node: {proj.id.split('-')[0].toUpperCase()}</span>
               </div>
               <div className="project-meta-top" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', borderBottom: 'var(--border)', padding: '12px 0 16px', marginBottom: '24px' }}>
                 <h3 style={{ fontSize: '1.6rem', maxWidth: '75%' }}>{proj.title}</h3>
@@ -459,19 +475,19 @@ export default function App() {
 
       {/* Section 03: Research Output */}
       <section id="papers" style={{ padding: '100px 4vw', maxWidth: '1200px', margin: '0 auto', borderBottom: 'var(--border)', scrollMarginTop: '100px' }}>
-        <span className="section-index" style={{ fontSize: '0.8rem', fontWeight: 700, border: 'var(--border)', padding: '4px 12px', display: 'inline-block', marginBottom: '24px', background: '#FFF' }}>03 // CERTIFIED_DOCUMENTS</span>
+        <span className="section-index" style={{ fontSize: '0.8rem', fontWeight: 700, border: 'var(--border)', padding: '4px 12px', display: 'inline-block', marginBottom: '24px', background: '#FFF' }}>03 // Publications</span>
         <div className="doc-container" style={{ border: 'var(--border)', padding: '40px', marginTop: '40px', background: '#FFF', boxShadow: '8px 8px 0px #000' }}>
           <h3 style={{ fontSize: '1.4rem', marginBottom: '16px', lineHeight: 1.3 }}>Deep Learning-Based Underwater Fish Species Classification and Localization using Mask-Annotated Crops and Convolutional Architectures</h3>
           <p style={{ color: '#333', fontSize: '0.95rem', marginBottom: '24px', lineHeight: 1.6 }}>Co-authored an automated processing framework evaluating CNN-based segmentation networks configured to accurately capture and extract marine life patterns from low-visibility, chaotic underwater video feeds. Presented and archived within the contexts of the IEEE INSPECT 2025 conference proceedings, ABV-IIITM Gwalior, India (Published January 2026).</p>
           <a className="btn dark" href="https://doi.org/10.1109/INSPECT67393.2025.11350522" target="_blank" rel="noopener noreferrer">
-            SYSTEM_DOI: 10.1109/INSPECT67393.2025.11350522 <ArrowUpRight size={14} />
+            View Paper <ArrowUpRight size={14} />
           </a>
         </div>
       </section>
 
       {/* Section 04: Capability Matrix */}
       <section id="matrix" style={{ padding: '100px 4vw', maxWidth: '1200px', margin: '0 auto', borderBottom: 'var(--border)' }}>
-        <span className="section-index" style={{ fontSize: '0.8rem', fontWeight: 700, border: 'var(--border)', padding: '4px 12px', display: 'inline-block', marginBottom: '24px', background: '#FFF' }}>04 // DATA_MATRICES</span>
+        <span className="section-index" style={{ fontSize: '0.8rem', fontWeight: 700, border: 'var(--border)', padding: '4px 12px', display: 'inline-block', marginBottom: '24px', background: '#FFF' }}>04 // Skill Matrix</span>
         <div className="grid-matrix" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '24px', marginTop: '40px' }}>
           {skillMatrix.map((matrix, mIdx) => (
             <div key={mIdx} className="matrix-cell" style={{ border: 'var(--border)', padding: '24px', background: '#FFF', boxShadow: '4px 4px 0px #000' }}>
@@ -491,11 +507,11 @@ export default function App() {
 
       {/* Footer Node */}
       <footer id="contact" style={{ padding: '120px 4vw 80px', textAlign: 'center', background: '#000', color: '#FFF' }}>
-        <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3.8rem)', marginBottom: '20px' }}>TERMINATE_SESSION // OPEN_COMMS</h2>
+        <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3.8rem)', marginBottom: '20px' }}>Get In Touch</h2>
         <div className="footer-links" style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <a className="btn" style={{ background: '#000', color: '#FFF', borderColor: '#FFF', boxShadow: '4px 4px 0px #FFF' }} href="mailto:vishnuchaitanyapulavarthi@gmail.com"><Send size={14} /> EMAIL_NODE</a>
-          <a className="btn" style={{ background: '#000', color: '#FFF', borderColor: '#FFF', boxShadow: '4px 4px 0px #FFF' }} href="https://linkedin.com/in/pulavarthivishnu" target="_blank" rel="noopener noreferrer">LINKEDIN_SYS</a>
-          <a className="btn" style={{ background: '#000', color: '#FFF', borderColor: '#FFF', boxShadow: '4px 4px 0px #FFF' }} href="https://github.com/lucifer12122" target="_blank" rel="noopener noreferrer">GITHUB_ARCHIVE</a>
+          <a className="btn" style={{ background: '#000', color: '#FFF', borderColor: '#FFF', boxShadow: '4px 4px 0px #FFF' }} href="mailto:vishnuchaitanyapulavarthi@gmail.com"><Send size={14} /> Email</a>
+          <a className="btn" style={{ background: '#000', color: '#FFF', borderColor: '#FFF', boxShadow: '4px 4px 0px #FFF' }} href="https://linkedin.com/in/pulavarthivishnu" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a className="btn" style={{ background: '#000', color: '#FFF', borderColor: '#FFF', boxShadow: '4px 4px 0px #FFF' }} href="https://github.com/lucifer12122" target="_blank" rel="noopener noreferrer">GitHub</a>
         </div>
       </footer>
     </div>
